@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Lumina Dashboard — Analytics</title>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="bg-orbs">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<div id="app">
+  <aside id="sidebar">
+    <div class="logo-area">
+      <div class="logo">
+        <div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div><div class="logo-name">Lumina</div><div class="logo-ver">v3.1.0-beta</div></div>
+      </div>
+    </div>
+    <nav class="nav">
+      <div class="nav-group">
+        <div class="nav-group-title">Overview</div>
+        <div class="nav-item active"><span class="icon">◈</span>Dashboard<span class="nav-badge">Live</span></div>
+        <div class="nav-item"><span class="icon">▣</span>Analytics</div>
+        <div class="nav-item"><span class="icon">◉</span>Reports</div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">Management</div>
+        <div class="nav-item"><span class="icon">▷</span>Campaigns<span class="nav-badge">4</span></div>
+        <div class="nav-item"><span class="icon">⊞</span>Audience</div>
+        <div class="nav-item"><span class="icon">◎</span>Conversions</div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-title">System</div>
+        <div class="nav-item"><span class="icon">⚙</span>Settings</div>
+        <div class="nav-item"><span class="icon">?</span>Help</div>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-row">
+        <div class="avatar">AK</div>
+        <div><div class="user-name">Aryan K.</div><div class="user-role">Growth Lead</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <div style="display:flex;flex-direction:column;">
+    <header id="header">
+      <div>
+        <div class="header-title">Performance Overview</div>
+        <div class="header-sub">Real-time analytics · Updated just now</div>
+      </div>
+      <div class="header-actions">
+        <div class="date-chip" id="live-date">--</div>
+        <button class="btn btn-ghost">Export</button>
+        <button class="btn btn-primary">+ New Report</button>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- KPIs -->
+      <div class="kpi-grid">
+        <div class="kpi-card blue">
+          <div class="kpi-header"><span class="kpi-label">Total Revenue</span><div class="kpi-icon blue">💰</div></div>
+          <div class="kpi-value" id="kpi-rev">$0</div>
+          <span class="kpi-delta up">↑ 12.4%</span>
+          <svg class="sparkline" id="spark-1"></svg>
+        </div>
+        <div class="kpi-card violet">
+          <div class="kpi-header"><span class="kpi-label">Active Users</span><div class="kpi-icon violet">👥</div></div>
+          <div class="kpi-value" id="kpi-users">0</div>
+          <span class="kpi-delta up">↑ 8.7%</span>
+          <svg class="sparkline" id="spark-2"></svg>
+        </div>
+        <div class="kpi-card emerald">
+          <div class="kpi-header"><span class="kpi-label">Conversion Rate</span><div class="kpi-icon emerald">🎯</div></div>
+          <div class="kpi-value" id="kpi-conv">0%</div>
+          <span class="kpi-delta down">↓ 1.2%</span>
+          <svg class="sparkline" id="spark-3"></svg>
+        </div>
+        <div class="kpi-card rose">
+          <div class="kpi-header"><span class="kpi-label">Bounce Rate</span><div class="kpi-icon rose">↩</div></div>
+          <div class="kpi-value" id="kpi-bounce">0%</div>
+          <span class="kpi-delta up">↑ 2.1%</span>
+          <svg class="sparkline" id="spark-4"></svg>
+        </div>
+      </div>
+
+      <!-- CHARTS -->
+      <div class="chart-row">
+        <div class="panel-card">
+          <div class="card-title-row">
+            <div><div class="card-title">Revenue Over Time</div><div class="card-sub">Last 30 days performance</div></div>
+            <div class="tab-group">
+              <div class="tab active">30D</div>
+              <div class="tab">90D</div>
+              <div class="tab">1Y</div>
+            </div>
+          </div>
+          <div class="chart-area">
+            <canvas id="line-chart" class="chart-canvas" height="180"></canvas>
+          </div>
+        </div>
+        <div class="panel-card">
+          <div class="card-title-row">
+            <div><div class="card-title">Traffic Sources</div><div class="card-sub">Channel breakdown</div></div>
+          </div>
+          <div class="donut-wrap">
+            <div class="donut-center">
+              <canvas id="donut-chart" width="140" height="140"></canvas>
+              <div class="donut-label"><div class="donut-val">84%</div><div class="donut-sub">Organic</div></div>
+            </div>
+            <div class="donut-legend" id="donut-legend"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM -->
+      <div class="bottom-row">
+        <div class="panel-card table-wrap">
+          <div class="card-title-row">
+            <div><div class="card-title">Active Campaigns</div></div>
+            <span style="font-size:11px;color:var(--blue2);cursor:pointer;">View all →</span>
+          </div>
+          <table>
+            <thead><tr><th>Campaign</th><th>Impressions</th><th>CTR</th><th>Status</th></tr></thead>
+            <tbody id="campaign-table"></tbody>
+          </table>
+        </div>
+        <div class="panel-card">
+          <div class="card-title-row">
+            <div><div class="card-title">Live Activity</div></div>
+            <span class="kpi-delta up" style="font-size:10px;">● Live</span>
+          </div>
+          <div class="feed" id="activity-feed"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
